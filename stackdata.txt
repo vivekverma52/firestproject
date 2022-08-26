@@ -1,0 +1,1280 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+void line(){
+    cout <<"*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*"<<endl;
+}
+string spaces(){
+    return "                                                                             ";
+}
+class Myarray{
+    int *arr;
+    int n;
+    int c_size;
+    public:
+    Myarray(int N){
+        n=N;
+        arr=new int[n];
+        c_size=0;
+    }
+    
+    void insert_elements(){
+        line();
+        cout << "Enter the number of elements you want to insert in array :";
+        cin >>c_size;
+        cout << "Enter the elements you want to insert in array :";
+        if(c_size>n){
+            cout << "Array is of size" << n <<endl;
+            return;
+        }
+        for(int i=0;i<c_size;i++){
+            cin >> arr[i];
+        }
+        
+    }
+    void display(){
+        line();
+        if(c_size==0){
+            cout << "Array is empty"<<endl;
+        }
+        cout << "Elements of array are :";
+        for(int i=0;i<c_size;i++){
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+    
+    void insert_at_pos(int pos,int value){
+        if(c_size==0){
+            cout << "Call insert_elements first " <<endl;
+            return;
+        }
+        if(c_size==n){
+        line();
+            cout << "Array is full "<<endl;
+            return;
+        }
+        for(int i=c_size;i>pos-1;i--){
+            arr[i]=arr[i-1];
+        }
+        arr[pos-1]=value;
+        c_size++;
+        
+        cout << endl;
+    }
+    
+    void delete_at_end(){
+        if(c_size==0){
+            line();
+            cout << "Array is empty" <<endl;
+        }
+        c_size--;
+        
+    }
+    
+    void delete_at_pos(int pos){
+        if(c_size==0){
+            line();
+            cout << "Array is empty" <<endl;
+            return;
+        }
+        if(pos==c_size){
+            delete_at_end();
+            return;
+        }
+        
+        for(int i=pos-1;i<c_size;i++){
+            arr[i]=arr[i+1];
+        }
+        c_size--;
+    }
+    
+    void search(int value){
+        line();
+        for(int i=0;i<c_size;i++){
+            if(arr[i]==value){
+                
+                cout << "Element is found at position " << i+1<<endl;
+                return;
+            }
+        }
+        cout << "Element is not present in array " <<endl;
+    }
+    void sort_array(){
+        if(c_size>0)
+        sort(arr,arr+c_size);
+        
+    }
+     
+    void reverse_array(){
+        if(c_size>0)
+        reverse(arr,arr+c_size);
+        else{
+            cout << "Array is empty" <<endl;
+        }
+    }
+    void largest(){
+        line();
+        if(c_size>0)
+        cout << "Largest element in array is : " << *max_element(arr,arr+c_size) << endl;
+        else{
+            cout << "Array is empty" <<endl;
+        }
+    }
+    
+    void smallest(){
+        line();
+        if(c_size>0)
+        cout << "smallest element in array is : " << *min_element(arr,arr+c_size) << endl;
+        else{
+            cout << "Array is empty" <<endl;
+        }
+    }
+    
+    void average(){
+       line();
+       if(c_size>0){
+           float sum=0;
+           for(int i=0;i<c_size;i++){
+               sum+=arr[i];
+           }
+           float avg=(float)sum/c_size;
+           cout << "Average of array is :" << avg <<endl;
+       }else{
+           cout << "Array is empty" <<endl;
+       }
+    }
+    
+    void My_features(){
+        while(1){
+           line();
+           cout <<endl;
+           cout <<endl;
+           cout << "1.Insert elements in array" <<endl;
+           cout << "2.Insert elements at position in  array" <<endl;
+           cout << "3.Delete last element in array" <<endl;
+           cout << "4.Delete elements at postion in array" <<endl;
+           cout << "5.Largest elements in array" <<endl;
+           cout << "6.smallest elements in array" <<endl;
+           cout << "7.Average of elements in array" <<endl;
+           cout << "8.Sort elements in array" <<endl;
+           cout << "9.Reverse  elements in array" <<endl;
+           cout << "10.Search element in array" <<endl;
+           cout << "11.Display elements in array" <<endl;
+           cout << "12.Exit" <<endl;
+           cout <<endl;
+           line();
+           cout << "Enter your selection:";
+           int select;
+           cin >> select;
+           switch(select){
+               case 1:
+               insert_elements();
+               break;
+               
+               case 2:
+               int pos,value;
+               cout << "Enter the postion and value you want to insert respectively :";
+               cin>> pos >>value;
+               insert_at_pos(pos,value);
+               break;
+               
+               case 3:
+               delete_at_end();
+               break;
+            
+               case 4:
+               int pos1;
+               cout << "Enter the postion  :";
+               cin>> pos1;
+               delete_at_pos(pos1);
+               break;
+               
+               case 5:
+              largest();
+               break;
+               
+               case 6:
+               smallest();
+               break;
+               
+               case 7:
+               average();
+               break;
+               
+               case 8:
+               sort_array();
+               break;
+               
+               case 9:
+               reverse_array();
+               break;
+               
+               case 10:
+               int val;
+               cout << "Enter the value you want to search "<<endl;
+               cin >> val;
+               search(val);
+               break;
+               
+               case 11:
+               display();
+               break;
+               
+               
+               
+               default:
+               cout << "Wrong selection " <<endl;
+               
+               
+           }
+           }
+    }
+};
+
+struct ListNode{
+    int data;
+    ListNode *next;
+    ListNode(int x){
+        data=x;
+        next=NULL;
+    }
+};
+class MySinglylinkedlist{
+    ListNode *head;
+    ListNode *tail;
+    public:
+    MySinglylinkedlist(){
+        head=tail=NULL;
+    }
+    
+    int size(){
+        int count =0;
+        ListNode *temp=head;
+        while(temp!=NULL){
+            count ++;
+            temp=temp->next;
+        }
+        return count;
+    }
+    
+    void insert_at_beginning(int x){
+        
+        ListNode *new_node=new ListNode(x);
+        if(head==NULL){
+            head=tail=new_node;
+            return;
+        }
+        new_node->next=head;
+        head=new_node;
+    }
+    
+    void insert_at_end(int x){
+        ListNode *new_node=new ListNode(x);
+        if(head==NULL){
+            head=tail=new_node;
+            return;
+        }
+        tail->next=new_node;
+        tail=tail->next;
+    }
+    void insert_at_pos(int pos,int x){
+        if(pos<1 || pos>size()+1){
+            cout << "Invalid position " <<endl;
+            return;
+        }
+        ListNode *new_node=new ListNode(x);
+        if(pos==1){
+            insert_at_beginning(x);
+            return;
+        }
+        if(pos==size()+1){
+            insert_at_end(x);
+            return;
+        }
+        
+        ListNode *temp=head;
+        for(int i=1;i<pos-1;i++){
+            temp=temp->next;
+        }
+        new_node->next=temp->next;
+        temp->next=new_node;
+    }
+    
+    void delete_head(){
+        if(head==NULL){
+            cout << "List is empty" <<endl;
+            return;
+        }
+        if(head==tail){
+            head=tail=NULL;
+            return;
+        }
+        
+        ListNode* temp=head;
+        head=head->next;
+        delete temp;
+    }
+    
+    void delete_tail(){
+        if(head==NULL){
+            cout << "List is empty" <<endl;
+            return;
+        }
+        
+        if(head==tail){
+            head=tail=NULL;
+            return;
+        }
+        
+        ListNode *temp=head;
+        while(temp->next!=tail){
+            temp=temp->next;
+        }
+        delete temp->next;
+        tail=temp;
+        tail->next=NULL;
+        
+    }
+    
+    void delete_at_pos(int pos){
+        if(pos<1 || pos>size()+1){
+            cout << "Invalid position " <<endl;
+            return;
+        }
+        if(pos==1){
+            delete_head();
+            return;
+        }
+        if(pos==size()){
+            delete_tail();
+        }
+        
+        ListNode *temp=head;
+        for(int i=1;i<pos-1;i++){
+            temp=temp->next;
+        }
+        
+        ListNode *ptr=temp->next;
+        temp->next=ptr->next;
+        delete ptr;
+    }
+    
+    void reverse(){
+        ListNode *curr=head;
+        ListNode *next=NULL,*prev=NULL;
+        while(curr){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        tail=head;
+        head=prev;
+    }
+    void display(){
+         cout << "***************************************************************"<<endl;
+         
+         cout <<endl;
+         cout <<endl;
+        if(head==NULL){
+            cout << "List is empty" <<endl;
+            return;
+        }
+        cout <<"element in list are :";
+        ListNode *temp=head;
+        while(temp!=NULL){
+            cout << temp->data << " ";
+            temp=temp->next;
+        }
+        cout <<endl;
+        cout << endl;
+    }
+    void list_operations(){
+        while(1){
+             cout << "***************************************************************"<<endl;
+            cout << "1.Insert at head of  list" <<endl;
+            cout << "2.Insert at tail of  list" <<endl;
+            cout << "3.Insert at postion in  list" <<endl;
+            cout << "4.Delete  head of  list" <<endl;
+            cout << "5.Delete tail of  list" <<endl;
+            cout << "6.Delete at position in list" <<endl;
+            cout << "7.Reverse list" <<endl;
+            cout << "8.Number of element in list" <<endl;
+            cout << "9.Display list "<<endl;
+            cout << "10.Exit"<<endl;
+            int select;
+            cout << "***************************************************************"<<endl;
+            cout << "Enter your selection :";
+            cin >> select;
+            
+            switch(select){
+                case 1:
+                cout << "***************************************************************"<<endl;
+                int value;
+                cout << "Enter the value to be inserted :";
+                cin >> value;
+                insert_at_beginning(value);
+                
+                break;
+                
+                case 2:
+                cout << "***************************************************************"<<endl;
+                int value1;
+                cout << "Enter the value to be inserted :";
+                cin >> value1;
+                insert_at_end(value1);
+                
+                break;
+                
+                case 3:
+                cout << "***************************************************************"<<endl;
+                
+                int value3,pos;
+                cout << "Enter the position and value :" ;
+                cin >>pos >> value3;
+                insert_at_pos(pos,value3);
+                
+                break;
+                
+                case 4:
+                delete_head();
+                
+                break;
+                
+                case 5:
+                delete_tail();
+                
+                break;
+                
+                case 6:
+                cout << "***************************************************************"<<endl;
+                int pos1;
+                cout << "Enter the position :";
+                cin >>pos1;
+                
+                delete_at_pos(pos1);
+                
+                break;
+                
+                case 7:
+                reverse();
+                
+                break;
+                
+                case 8:
+                cout << "***************************************************************"<<endl;
+                cout << "List contains " << size() << " elements " <<endl;
+                
+                break;
+                
+                case 9:
+                display();
+                break;
+                case 10:
+                return;
+                break;
+                
+                default:
+                cout << "Wrong selection " <<endl;
+            }
+
+           }
+    }
+};
+
+struct Dnode{
+    int data;
+    Dnode *next;
+    Dnode *prev;
+    Dnode(int x){
+        data=x;
+        next=prev=NULL;
+    }
+};
+
+class Mydoublylist{
+    Dnode *head;
+    Dnode *tail;
+    public:
+    Mydoublylist(){
+        head=tail=NULL;
+    }
+    
+    int size(){
+        int count =0;
+        Dnode *temp=head;
+        while(temp!=NULL){
+            count ++;
+            temp=temp->next;
+        }
+        return count;
+    }
+    
+    void insert_at_beginning(int x){
+        
+        Dnode *new_node=new Dnode(x);
+        if(head==NULL){
+            head=tail=new_node;
+            return;
+        }
+        head->prev=new_node;
+        new_node->next=head;
+        head=new_node;
+    }
+    
+    void insert_at_end(int x){
+        Dnode *new_node=new Dnode(x);
+        if(head==NULL){
+            head=tail=new_node;
+            return;
+        }
+        new_node->prev=tail;
+        tail->next=new_node;
+        tail=tail->next;
+    }
+    void insert_at_pos(int pos,int x){
+        if(pos<1 || pos>size()+1){
+            cout << "Invalid position " <<endl;
+            return;
+        }
+        Dnode *new_node=new Dnode(x);
+        if(pos==1){
+            insert_at_beginning(x);
+            return;
+        }
+        if(pos==size()+1){
+            insert_at_end(x);
+            return;
+        }
+        
+        Dnode *temp=head;
+        for(int i=1;i<pos-1;i++){
+            temp=temp->next;
+        }
+        new_node->prev=temp;
+        new_node->next=temp->next;
+        temp->next->prev=new_node;
+        temp->next=new_node;
+    }
+    
+    void delete_head(){
+        if(head==NULL){
+            cout << "List is empty" <<endl;
+            return;
+        }
+        if(head==tail){
+            head=tail=NULL;
+            return;
+        }
+        
+        Dnode* temp=head;
+        head=head->next;
+        head->prev=NULL;
+        delete temp;
+    }
+    
+    void delete_tail(){
+        if(head==NULL){
+            cout << "List is empty" <<endl;
+            return;
+        }
+        
+        if(head==tail){
+            head=tail=NULL;
+            return;
+        }
+        
+        Dnode *temp=head;
+        while(temp->next!=tail){
+            temp=temp->next;
+        }
+        delete temp->next;
+        tail=temp;
+        tail->next=NULL;
+        
+    }
+    
+    void delete_at_pos(int pos){
+        if(pos<1 || pos>size()+1){
+            cout << "Invalid position " <<endl;
+            return;
+        }
+        if(pos==1){
+            delete_head();
+            return;
+        }
+        if(pos==size()){
+            delete_tail();
+        }
+        
+        Dnode *temp=head;
+        for(int i=1;i<pos-1;i++){
+            temp=temp->next;
+        }
+        
+        Dnode *ptr=temp->next;
+        temp->next=ptr->next;
+        temp->next->prev=temp;
+        delete ptr;
+    }
+    
+    void reverse(){
+       Dnode *temp = NULL;
+       Dnode *curr = head;
+     
+       while (curr!=NULL){
+        temp = curr->prev;
+        curr->prev = curr->next;
+        curr->next = temp;            
+        curr = curr->prev;
+       }
+     
+
+    if(temp != NULL )
+        head= temp->prev;
+    }
+    void display(){
+         cout << "***************************************************************"<<endl;
+         
+         cout <<endl;
+         cout <<endl;
+        if(head==NULL){
+            cout << "List is empty" <<endl;
+            return;
+        }
+        cout <<"Element in list are :";
+        Dnode *temp=head;
+        while(temp!=NULL){
+            cout << temp->data << " ";
+            temp=temp->next;
+        }
+        cout <<endl;
+        cout << endl;
+    }
+    
+    void list_operations(){
+        int end=1;
+         while(end){
+            cout << "***************************************************************"<<endl;
+            cout << "1.Insert at head of  list" <<endl;
+            cout << "2.Insert at tail of  list" <<endl;
+            cout << "3.Insert at postion in  list" <<endl;
+            cout << "4.Delete  head of  list" <<endl;
+            cout << "5.Delete tail of  list" <<endl;
+            cout << "6.Delete at position in list" <<endl;
+            cout << "7.Reverse list" <<endl;
+            cout << "8.Number of element in list" <<endl;
+            cout << "9.Display list "<<endl;
+            cout << "10.Exit"<<endl;
+            int select;
+            cout << "***************************************************************"<<endl;
+            cout << "Enter your selection :";
+            cin >> select;
+            
+            switch(select){
+                case 1:
+                cout << "***************************************************************"<<endl;
+                int value;
+                cout << "Enter the value to be inserted :";
+                cin >> value;
+                insert_at_beginning(value);
+                
+                break;
+                
+                case 2:
+                cout << "***************************************************************"<<endl;
+                int value1;
+                cout << "Enter the value to be inserted :";
+                cin >> value1;
+                insert_at_end(value1);
+                
+                break;
+                
+                case 3:
+                cout << "***************************************************************"<<endl;
+                
+                int value3,pos;
+                cout << "Enter the position and value :" ;
+                cin >>pos >> value3;
+                insert_at_pos(pos,value3);
+                
+                break;
+                
+                case 4:
+                delete_head();
+                
+                break;
+                
+                case 5:
+                delete_tail();
+                
+                break;
+                
+                case 6:
+                cout << "***************************************************************"<<endl;
+                int pos1;
+                cout << "Enter the position :";
+                cin >>pos1;
+                
+                delete_at_pos(pos1);
+                
+                break;
+                
+                case 7:
+                reverse();
+                
+                break;
+                
+                case 8:
+                cout << "***************************************************************"<<endl;
+                cout << "List contains " << size() << " elements " <<endl;
+                
+                break;
+                
+                case 9:
+                display();
+                break;
+                case 10:
+                return;
+                break;
+                
+                default:
+                cout << "Wrong selection " <<endl;
+            }
+
+           }
+    }
+};
+
+class Mycircularlist{
+    ListNode *head;
+    ListNode *tail;
+    public:
+    Mycircularlist(){
+        head=tail=NULL;
+    }
+    
+    int size(){
+        int count =0;
+        ListNode *temp=head;
+        do{
+            count ++;
+            temp=temp->next;
+        }while(temp!=head);
+        return count;
+    }
+    
+    void insert_at_beginning(int x){
+        
+        ListNode *new_node=new ListNode(x);
+        if(head==NULL){
+            head=tail=new_node;
+            head->next=head;
+            tail->next=tail;
+            return;
+        }
+        new_node->next=head;
+        tail->next=new_node;
+        head=new_node;
+    }
+    
+    void insert_at_end(int x){
+        ListNode *new_node=new ListNode(x);
+        if(head==NULL){
+            insert_at_beginning(x);
+            return;
+        }
+        tail->next=new_node;
+        new_node->next=head;
+        tail=tail->next;
+    }
+    void insert_at_pos(int pos,int x){
+        if(pos<1 || pos>size()+1){
+            cout << "Invalid position " <<endl;
+            return;
+        }
+        ListNode *new_node=new ListNode(x);
+        if(pos==1){
+            insert_at_beginning(x);
+            return;
+        }
+        if(pos==size()+1){
+            insert_at_end(x);
+            return;
+        }
+        
+        ListNode *temp=head;
+        for(int i=1;i<pos-1;i++){
+            temp=temp->next;
+        }
+        new_node->next=temp->next;
+        temp->next=new_node;
+    }
+    
+    void delete_head(){
+        if(head==NULL){
+            cout << "List is empty" <<endl;
+            return;
+        }
+        if(head==tail){
+            head=tail=NULL;
+            return;
+        }
+        
+        ListNode* temp=head;
+        head=head->next;
+        tail->next=head;
+        delete temp;
+        
+    }
+    
+    void delete_tail(){
+        if(head==NULL){
+            cout << "List is empty" <<endl;
+            return;
+        }
+        
+        if(head==tail){
+            head=tail=NULL;
+            return;
+        }
+        
+        ListNode *temp=head;
+        while(temp->next!=tail){
+            temp=temp->next;
+        }
+        ListNode *ptr=temp->next;
+        temp->next=head;
+        delete ptr;
+        tail=temp;
+        
+    }
+    
+    void delete_at_pos(int pos){
+        if(pos<1 || pos>size()+1){
+            cout << "Invalid position " <<endl;
+            return;
+        }
+        if(pos==1){
+            delete_head();
+            return;
+        }
+        if(pos==size()){
+            delete_tail();
+        }
+        
+        ListNode *temp=head;
+        for(int i=1;i<pos-1;i++){
+            temp=temp->next;
+        }
+        
+        ListNode *ptr=temp->next;
+        temp->next=ptr->next;
+        delete ptr;
+    }
+    
+    void reverse(){
+        ListNode *curr=head;
+        ListNode *next=NULL,*prev=NULL;
+        tail->next=NULL;
+        while(curr){
+            next=curr->next;
+            curr->next=prev;
+            prev=curr;
+            curr=next;
+        }
+        
+        tail=head;
+        head=prev;
+        tail->next=head;
+    }
+    
+    
+    void display(){
+     cout << "***************************************************************"<<endl;
+         
+        cout <<endl;
+        cout <<endl;
+        if(head==NULL){
+            cout << "List is empty" <<endl;
+            return;
+        }
+        cout <<"element in list are :";
+        ListNode *temp=head;
+        do{
+            cout << temp->data << " ";
+            temp=temp->next;
+        }while(temp!=head);
+        cout <<endl;
+        cout << endl;
+    }
+    
+    void list_operations(){
+        while(1){
+             cout << "***************************************************************"<<endl;
+            cout << "1.Insert at head of  list" <<endl;
+            cout << "2.Insert at tail of  list" <<endl;
+            cout << "3.Insert at postion in  list" <<endl;
+            cout << "4.Delete  head of  list" <<endl;
+            cout << "5.Delete tail of  list" <<endl;
+            cout << "6.Delete at position in list" <<endl;
+            cout << "7.Reverse list" <<endl;
+            cout << "8.Number of element in list" <<endl;
+            cout << "9.Display list "<<endl;
+            cout << "10.Exit"<<endl;
+            int select;
+            cout << "***************************************************************"<<endl;
+            cout << "Enter your selection :";
+            cin >> select;
+            
+            switch(select){
+                case 1:
+                cout << "***************************************************************"<<endl;
+                int value;
+                cout << "Enter the value to be inserted :";
+                cin >> value;
+                insert_at_beginning(value);
+                
+                break;
+                
+                case 2:
+                cout << "***************************************************************"<<endl;
+                int value1;
+                cout << "Enter the value to be inserted :";
+                cin >> value1;
+                insert_at_end(value1);
+                
+                break;
+                
+                case 3:
+                cout << "***************************************************************"<<endl;
+                
+                int value3,pos;
+                cout << "Enter the position and value :" ;
+                cin >>pos >> value3;
+                insert_at_pos(pos,value3);
+                
+                break;
+                
+                case 4:
+                delete_head();
+                
+                break;
+                
+                case 5:
+                delete_tail();
+                
+                break;
+                
+                case 6:
+                cout << "***************************************************************"<<endl;
+                int pos1;
+                cout << "Enter the position :";
+                cin >>pos1;
+                
+                delete_at_pos(pos1);
+                
+                break;
+                
+                case 7:
+                reverse();
+                
+                break;
+                
+                case 8:
+                cout << "***************************************************************"<<endl;
+                cout << "List contains " << size() << " elements " <<endl;
+                
+                break;
+                
+                case 9:
+                display();
+                break;
+                case 10:
+                return;
+                
+                default:
+                cout << "Wrong selection " <<endl;
+            }
+
+           }
+    }
+    
+};
+
+class LinkedList:public MySinglylinkedlist,public Mydoublylist,public Mycircularlist{   
+    public:
+    void call(){
+        int end=1;
+         while(1){
+             cout << "1.Singly Linked List"<<endl;
+             cout << "2.Doubly Linked List"<<endl;
+             cout << "3.Circular Linked List"<<endl;
+             cout << "4.Exit" <<endl;
+             int select;
+             cout << "Choose linked list :";
+             cin >> select;
+             
+             switch(select){
+                 case 1:
+                 {
+                     MySinglylinkedlist Sl;
+                     Sl.list_operations();
+                 }
+                 break;
+                 
+                 case 2:
+                 {
+                     Mydoublylist Dl;
+                     Dl.list_operations();
+                 }
+                 break;
+                 
+                 case 3:
+                 {
+                     Mycircularlist Cl;
+                     Cl.list_operations();
+                 }
+                 
+                 case 4:
+                 return;
+                 break;
+                 
+                 default:
+                 cout << "Wrong selection " <<endl;
+                 break;
+             }
+         }
+    }
+};
+
+class Stack_array{
+  
+    public:
+    int *arr;
+    int top;
+    int size;
+    Stack_array(){
+        top=-1;
+        size=100;
+        arr=new int[size];
+    }
+     
+    bool isempty(){
+        return (top==-1)?true:false;
+    }
+    
+    bool isfull(){
+        return (top==size)?true:false;
+    }
+    void push(int data){
+        if(isfull()){
+            cout << "Stack Is Full" <<endl;
+            return;
+        }
+        
+        top++;
+        arr[top]=data;
+    }
+    
+    void pop(){
+        if(isempty()){
+            cout << "Stack Is Empty" <<endl;
+            return;
+        }
+        
+        top--;
+    }
+     
+    int peek(){
+        return (isempty())?-1:arr[top];
+    }
+    
+    void get_size(){
+        cout << "Size Of Stack Is : " << top+1<<endl;
+    }
+    
+    void reverse(){
+        Stack_array temp;
+        while(!isempty()){
+            temp.push(peek());
+            pop();
+        }
+        Stack_array another_temp;
+        while(!temp.isempty()){
+            another_temp.push(temp.peek());
+            temp.pop();
+        }
+        
+        while(!another_temp.isempty()){
+            push(another_temp.peek());
+            another_temp.pop();
+        }
+    
+        
+    }
+    
+    void display(){
+        if(isempty()){
+            cout << "Stack Is Empty" <<endl;
+        }else{
+            cout << "Element in Stack is :";
+            for(int i=0;i<top+1;i++){
+                cout << arr[i] <<" " ;
+            }
+        }
+    }
+    void operations(){
+        while(1){
+            cout << "1.Push Element In Stack "<<endl;
+            cout << "2.Pop Element From Stack "<<endl;
+            cout << "3.Show Element At Top " <<endl;
+            cout << "4.Check If Stack Empty"<<endl;
+            cout << "5.Check If Stack Full"<<endl;
+            cout << "6.Get Size Of Stack "<<endl;
+            cout << "7.Reverse Stack "<<endl;
+            cout << "8.Display "<<endl;
+            cout << "9.Exit " <<endl;
+            
+            int select;
+            cout << "Choose Frome Given Menu :";
+            cin >>select;
+            switch(select){
+                case 1:
+                {
+                    int value;
+                    cout << "Enter the value to be pushed in Stack :";
+                    cin >> value;
+                    push(value);
+                
+                }
+                break;
+                
+                case 2:
+                {
+                    pop();
+                }
+                break;
+                
+                case 3:
+                {
+                    if(peek()==-1){
+                        cout << "The Stack Is Empty " <<endl;
+                    }else{
+                        cout << "The Element At Top Of List Is :"<< peek()<<endl;
+                    }
+                }
+                break;
+                
+                case 4:
+                {
+                    if(isempty()){
+                        cout << "Stack Is Empty" <<endl;
+                    }
+                    else{
+                        cout << "Stack Is Not Empty" <<endl;
+                    }
+                }
+                break;
+                
+                case 5:
+                {
+                    if(isfull()){
+                        cout << "Stack Is Full" <<endl;
+                    
+                    }else{
+                        cout << "Stack Is Not Full " <<endl;
+                    }
+                }
+                
+                break;
+                
+                case 6:
+                {
+                    get_size();
+                }
+                
+                break;
+                
+                case 7:
+                {
+                    reverse();
+                }
+                
+                break;
+                
+                case 8:
+                {
+                    display();
+                    return;
+                }
+                
+                break;
+                
+                case 9:
+                {
+                    return;
+                }
+                break;
+                default:
+                cout << "Wrong Selection" <<endl;
+                
+            }
+           
+        }
+    }
+    
+};
+
+class Stack_List{
+    Node *head;
+    Node *tail;
+    public:
+    
+    bool  isempty(){
+        
+    }
+}
+int main(){
+    while(1){
+       line();
+       cout << spaces() <<"1.Array"<<endl;
+       cout << spaces() <<"2.Linked List" <<endl;
+       cout << spaces() <<"3.Stack" <<endl;
+       cout << spaces() <<"4.Exit" <<endl;
+       line();
+       int  select;
+       cin >> select;
+        switch(select){
+           case 1:
+           {
+           int n;
+           cout << "Enter the size of the array :";
+           cin >> n;
+           Myarray a(n);
+           a.My_features();
+           }
+           break;
+           
+           case 2:
+           {
+            LinkedList l;
+            l.call();
+           
+           }
+           break;
+           
+           case 3:
+           {
+               Stack_array s;
+               s.operations();
+           }
+           break;
+           
+          
+       }
+       }
+}
